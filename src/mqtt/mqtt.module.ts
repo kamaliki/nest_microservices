@@ -18,6 +18,7 @@ import { RedisModule } from '../redis/redis.module';
         }
       },
     ]),
+    RedisModule
   ],
   controllers: [MqttController],
   providers: [MqttService, RedisService],

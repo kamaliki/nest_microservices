@@ -18,7 +18,18 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       },
     ]),
   ],
-  exports: [RedisService],
+  exports: [RedisService,
+    ClientsModule.register([
+      {
+        name: 'REDIS_SERVICE',
+        transport: Transport.REDIS,
+        options: {
+          host: new ConfigService().get('REDIS_HOST'),
+          port: new ConfigService().get('REDIS_PORT'),
+        }
+      },
+    ]),
+  ],
   controllers: [RedisController],
   providers: [RedisService],
 })

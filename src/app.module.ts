@@ -7,7 +7,7 @@ import { MqttModule } from './mqtt/mqtt.module';
 import { RedisModule } from './redis/redis.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),DeviceModule, MqttModule, RedisModule],
+  imports: [ConfigModule.forRoot(), DeviceModule, MqttModule, RedisModule],
   controllers: [AppController],
   providers: [AppService],
 })

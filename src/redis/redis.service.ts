@@ -1,15 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { Redis } from 'ioredis';
+import {
+    MessagePattern,
+    Payload,
+    Ctx,
+    RedisContext,
+  } from '@nestjs/microservices';
 
 @Injectable()
 export class RedisService {
-  private readonly redisClient: Redis;
+    
+    @MessagePattern('mqtt_messages')
+    getMqttMessages(@Payload() data: number[], @Ctx() context: RedisContext) {
+        console.log(`Channel: ${context.getChannel()}`);
+    }
+    
+    @MessagePattern('mqtt_messages')
+    storeMqttMessages(@Payload() data: number[]) {
+        //store messages in an a redis list
+        console.log('Storing data in Redis:::::', data);
+        //store in a redis list
+        //this.redisClient.lpush('mqtt_messages', JSON.stringify(data));
 
-  constructor() {
-    this.redisClient = new Redis(); // Assuming Redis server is running on default port and host
-  }
 
-  async storeMqttMessage(message: any): Promise<void> {
-    await this.redisClient.lpush('mqtt_messages', JSON.stringify(message));
-  }
+    }
 }
+
+

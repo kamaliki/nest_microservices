@@ -4,7 +4,9 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  // const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);
+  await app.listen(3000);
+  
   const mqttApp = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.MQTT,
     options: {
